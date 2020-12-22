@@ -7,6 +7,10 @@
     include("./functions.php");
 
     $user_data = checkIFUserIsLoggedIn($con);
+
+    if($user_data["user_id"]){
+        header("Location: dashboard.php");
+    }
 ?>
 
 <!DOCTYPE html>
