@@ -20,3 +20,23 @@ function checkIFUserIsLoggedIn($con){
     // If the user is not found then redirect it to the signup page
     header("Location: signup.php");
 }
+
+
+function generateUserID($maxLength){
+
+    // Code to generate a user_id for each of the user
+    $ID = "";
+
+    if($maxLength < 5){
+        $maxLength = 5;
+    }
+
+    $actualLength = rand(4, $maxLength);
+    
+
+    for($i = 0; $i < $actualLength; $i++){
+        $ID .= rand(1, 9);
+    }
+
+    return $ID;
+}

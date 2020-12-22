@@ -1,12 +1,17 @@
 <?php
-
-$dbhost = "localhost";
-$dbuser = "root";
-$dbpass = "";
-$dbname = "gymregistrationsystem";
-
-$con = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-
-if(!$con){
-    die("Could not connect to the database!");
-}
+    // <?php
+    // function OpenCon()
+    //  {
+    //  $dbhost = "localhost";
+    //  $dbuser = "root";
+    //  $dbpass = "1234";
+    //  $db = "example";
+    //  $conn = new mysqli($dbhost, $dbuser, $dbpass,$db) or die("Connect failed: %s\n". $conn -> error);
+     
+    //  return $conn;
+    //  }
+     
+    // function CloseCon($conn)
+    //  {
+    //  $conn -> close();
+    //  }
