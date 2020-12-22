@@ -11,6 +11,9 @@
     if($user_data["user_id"]){
         header("Location: dashboard.php");
     }
+    else {
+        header("Location: login.php");
+    }
 ?>
 
 <!DOCTYPE html>

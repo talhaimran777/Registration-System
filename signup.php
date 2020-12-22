@@ -110,6 +110,15 @@
                 <br />
                 <button type="submit" class="w-100 btn btn-block btn-outline-primary">SignUp</button>
             </form>
+
+            <div class="row mt-3">
+                <div class="col-6">
+                    <p class="mt-3">Already a user of this website?</p>
+                </div>
+                <div class="col-6">
+                    <a href="login.php" class="btn btn-primary mt-3 btn-sm">Log In Here</a>
+                </div>
+            </div>
         </div>
     </div>
     <!-- For Bootstrap to work perfectly -->
