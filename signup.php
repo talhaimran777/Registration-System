@@ -15,7 +15,26 @@
 
         if(!empty($user_name) && !empty($password) && !empty($password_copy)){
             if($password == $password_copy){
-                
+                // Generate a random user_id
+                $user_id = generateUserID(20);
+
+                // If connected then try select the db to enter the data
+                // If not generate an error
+                if(!mysqli_select_db($con, $dbname)){
+                    echo("Could not select the database!");
+                }
+
+                // Else write query to enter the user submitted data to the db
+                $query = "insert into users (user_id, user_name, password) values ('$user_id', '$user_name', '$password')";
+
+                // If not able to insert the data with the query generate an error
+                if(!mysqli_query($con, $query)){
+                    echo("Could not insert data into the database!");
+                }
+                else{
+                    echo("Insert data into the database!");
+                    header("Location: login.php");
+                }
             }
             else{
                 $error = true;
