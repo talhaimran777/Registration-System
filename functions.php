@@ -21,6 +21,30 @@ function checkIFUserIsLoggedIn($con){
     header("Location: login.php");
 }
 
+function checkIFLoggedIn($con){
+
+    if(isset($_SESSION["user_id"])){
+        // If it is set than check for it's legitment
+
+        $id = $_SESSION["user_id"];
+        $query = "select * from users where user_id = '$id' limit 1";
+
+        $result = mysqli_query($con, $query);
+
+        if($result && mysqli_num_rows($result) > 0){
+
+            // user exists
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    else{
+        return false;
+    }
+}
+
 
 function generateUserID($maxLength){
 

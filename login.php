@@ -8,6 +8,9 @@
     include("./connection.php");
     include("./functions.php");
 
+    if(checkIFLoggedIn($con)){
+        header("Location: dashboard.php");
+    }
     // $user_data = checkIFUserIsLoggedIn($con);
     // if($user_data){
     //     header("Location: dashboard.php");
