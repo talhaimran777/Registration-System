@@ -93,7 +93,9 @@
                     <td> <?php echo $row['phone']; ?> </td>
                     <td> <?php echo $row['address']; ?> </td>
                     <td>
-                        <i class="fas fa-edit text-success" style="margin-right: 5px; cursor: pointer;"></i>
+                        <a href="update.php">
+                            <i class="fas fa-edit text-success" style="margin-right: 5px; cursor: pointer;"></i>
+                        </a>
                         <i class="fas fa-trash text-danger" style=" cursor: pointer;"></i>
                     </td>
                 </tr>
