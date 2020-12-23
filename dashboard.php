@@ -5,6 +5,7 @@
     $user_data = checkIFUserIsLoggedIn($con);
 
     $fetched = false;
+    $noCustomerFound = false;
     $fetchingID = $user_data["id"];
     $result;
     // Make a query to the database to get the data
@@ -22,12 +23,13 @@
         //     echo $res['first_name'] . "<br/>";
         // }
         
-        if(!$result){
-            $error = true;
-            $errorMessage = "Could not fetch the data!";
+        if(mysqli_num_rows($result) === 0){
+            $noCustomerFound = true;
+            $noCustomerMessage = "You have not added any customers yet.";
         }
         else{
             $fetched = true;
+            $noCustomerFound = false;
         }
     }
     
@@ -59,50 +61,47 @@
     <div class="container px-5">
         <h3 class="mt-4 mb-5">Hello, <?php  echo($user_data["user_name"])?></h3>
 
-        <?php if(!$fetched){ ?>
-
-        <div class="d-flex justify-content-center my-5">
-            <div class="spinner-border" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
+        <?php if($noCustomerFound){ ?>
+        <p> <?php echo $noCustomerMessage ?> </p>
+        <a href="reg_customer.php" class="btn btn-primary btn-sm">Add Customer</a>
         <?php }else{ ?>
 
         <!-- Write html to display all the customers -->
 
-        <table class="table table-striped">
-            <thead className="thead-inverse">
-                <tr>
-                    <th>ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Phone No</th>
-                    <th>Address</th>
-                    <th />
-                </tr>
-            </thead>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead className="thead-inverse">
+                    <tr>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phone No</th>
+                        <th>Address</th>
+                        <th />
+                    </tr>
+                </thead>
 
-            <tbody>
-                <?php while($row = mysqli_fetch_array($result)){  ?>
-                <tr>
-                    <td> <?php echo $row['id']; ?> </td>
-                    <td> <?php echo $row['first_name']; ?> </td>
-                    <td> <?php echo $row['last_name']; ?> </td>
-                    <td> <?php echo $row['email']; ?> </td>
-                    <td> <?php echo $row['phone']; ?> </td>
-                    <td> <?php echo $row['address']; ?> </td>
-                    <td>
-                        <a href="update.php">
-                            <i class="fas fa-edit text-success" style="margin-right: 5px; cursor: pointer;"></i>
-                        </a>
-                        <i class="fas fa-trash text-danger" style=" cursor: pointer;"></i>
-                    </td>
-                </tr>
-                <?php } ?>
-            </tbody>
-        </table>
-
+                <tbody>
+                    <?php while($row = mysqli_fetch_array($result)){  ?>
+                    <tr>
+                        <td> <?php echo $row['id']; ?> </td>
+                        <td> <?php echo $row['first_name']; ?> </td>
+                        <td> <?php echo $row['last_name']; ?> </td>
+                        <td> <?php echo $row['email']; ?> </td>
+                        <td> <?php echo $row['phone']; ?> </td>
+                        <td> <?php echo $row['address']; ?> </td>
+                        <td>
+                            <a href="update.php?id=<?php echo $row['id']; ?>">
+                                <i class="fas fa-edit text-success" style="margin-right: 5px; cursor: pointer;"></i>
+                            </a>
+                            <i class="fas fa-trash text-danger" style=" cursor: pointer;"></i>
+                        </td>
+                    </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
 
         <?php }
         ?>

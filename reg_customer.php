@@ -71,7 +71,7 @@
         <div class="col-md-7 col-lg-6 mx-auto">
             <div class="card card-body bg-light">
 
-                <div class="row mb-4">
+                <div class="row mb-1">
                     <div class="col-8 align-self-center">
                         <h4 class="text-left mb-2 text-uppercase text-primary">Register Customer</h4>
                         <p class="text-left mb-2 strong">Add customer to datbase.</p>
@@ -117,7 +117,6 @@
                     <br />
                     <label for="first_name">Enter address</label>
                     <input type="text" class="form-control" name="address">
-                    <br />
                     <br />
                     <button type="submit" class="btn btn-primary w-100">Add Customer</button>
                 </form>
