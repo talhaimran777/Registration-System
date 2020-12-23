@@ -17,7 +17,7 @@ function checkIFUserIsLoggedIn($con){
         }
     }
 
-    // If the user is not found then redirect it to the signup page
+    // If the user is not found then redirect it to the login page
     header("Location: login.php");
 }
 

@@ -6,8 +6,15 @@
 
     // Including code from these files
     include("./connection.php");
-    //include("./functions.php");
+    include("./functions.php");
 
+    // $user_data = checkIFUserIsLoggedIn($con);
+    // if($user_data){
+    //     header("Location: dashboard.php");
+    // }
+
+    // header("Location: login.php");
+    
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $user_name =  $_POST["user_name"];
         $password =  $_POST["password"];

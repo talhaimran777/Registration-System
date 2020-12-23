@@ -8,6 +8,11 @@
     include("./connection.php");
     include("./functions.php");
 
+    // $user_data = checkIFUserIsLoggedIn($con);
+    // if(!empty($user_data)){
+    //     header("Location: dashboard.php");
+    // }
+
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $user_name =  $_POST["user_name"];
         $password =  $_POST["password"];
