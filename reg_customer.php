@@ -5,6 +5,46 @@
     include("./functions.php");
 
     $user_data = checkIFUserIsLoggedIn($con);
+
+    $error = false;
+    $inserted = false;
+    $successMessage = "";
+    $errorMessage = "";
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        
+        $first_name =  $_POST["first_name"];
+        $last_name =  $_POST["last_name"];
+        $email =  $_POST["email"];
+        $phone =  $_POST["phone"];
+        $address =  $_POST["address"];
+        $user_id =  $user_data["id"];
+
+        if(!empty($first_name) && !empty($last_name) && !empty($email) && !empty($phone) && !empty($address)){
+            if(!mysqli_select_db($con, $dbname)){
+                $error = true;
+                $errorMessage = "Connection Faild to the database!";
+            }
+            else{
+                $query = "insert into customers (user_id, first_name, last_name, email, phone, address) values ('$user_id', '$first_name', '$last_name', '$email', '$phone', '$address')";     
+                
+                
+                $result  = mysqli_query($con, $query);
+
+                if(!$result){
+                    $error = true;
+                    $errorMessage = "Data could not be inserted!";
+                }
+                else{
+                    $inserted = true;
+                    $successMessage = "Data Inserted Successfully!";
+                }
+            }
+        }
+        else{
+            $error = true;
+            $errorMessage = "Cannot leave any of the fields empty!";
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,13 +68,14 @@
     <?php include("./components/navbar.php"); ?>
 
     <div class="container">
-        <div class="col-md-7 col-lg-6 mx-auto py-5">
+        <div class="col-md-7 col-lg-6 mx-auto">
             <div class="card card-body bg-light">
 
                 <div class="row mb-4">
                     <div class="col-8 align-self-center">
                         <h4 class="text-left mb-2 text-uppercase text-primary">Register Customer</h4>
                         <p class="text-left mb-2 strong">Add customer to datbase.</p>
+                        <p>You cannot enter customer details with same phone or email.</p>
                     </div>
                     <div class="col-4 align-self-center text-center">
                         <i class="fa fa-user-plus fa-3x text-primary" aria-hidden="true"></i>
@@ -42,7 +83,26 @@
                     </div>
                 </div>
 
-                <form type="submit">
+                <?php
+                    if($error){ ?>
+
+                <div class="alert alert-danger alert-dismissible fade show">
+                    <button type="button" class="btn btn-danger close mr-4" data-dismiss="alert">&times;</button>
+                    <?php echo $errorMessage ?>
+                </div><?php
+                }
+                ?>
+
+                <?php
+                    if($inserted){ ?>
+
+                <div class="alert alert-success alert-dismissible fade show">
+                    <button type="button" class="btn btn-success close mr-4" data-dismiss="alert">&times;</button>
+                    <?php echo $successMessage ?>
+                </div><?php
+                }
+                ?>
+                <form type="submit" method="POST">
                     <label for="first_name">Enter first name</label>
                     <input type="text" class="form-control" name="first_name">
                     <br />
