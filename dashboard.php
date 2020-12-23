@@ -95,7 +95,11 @@
                             <a href="update.php?id=<?php echo $row['id']; ?>">
                                 <i class="fas fa-edit text-success" style="margin-right: 5px; cursor: pointer;"></i>
                             </a>
-                            <i class="fas fa-trash text-danger" style=" cursor: pointer;"></i>
+
+                            <a href="delete.php?id=<?php echo $row['id']; ?>">
+                                <i class="fas fa-trash text-danger" style=" cursor: pointer;"></i>
+                            </a>
+
                         </td>
                     </tr>
                     <?php } ?>
